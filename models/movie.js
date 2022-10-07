@@ -26,7 +26,7 @@ const movieSchema = new mongoose.Schema({
     type: String,
     required: true,
     validate: {
-      validator: (v) => urlRegex.text(v),
+      validator: (v) => urlRegex.test(v),
       message: (props) => `${props.value} is not a URL`,
     },
   },
@@ -34,7 +34,7 @@ const movieSchema = new mongoose.Schema({
     type: String,
     required: true,
     validate: {
-      validator: (v) => urlRegex.text(v),
+      validator: (v) => urlRegex.test(v),
       message: (props) => `${props.value} is not a URL`,
     },
   },
@@ -42,7 +42,7 @@ const movieSchema = new mongoose.Schema({
     type: String,
     required: true,
     validate: {
-      validator: (v) => urlRegex.text(v),
+      validator: (v) => urlRegex.test(v),
       message: (props) => `${props.value} is not a URL`,
     },
   },
@@ -63,6 +63,6 @@ const movieSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-});
+}, { versionKey: false });
 
 module.exports = mongoose.model('movie', movieSchema);
