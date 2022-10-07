@@ -1,5 +1,9 @@
+const { errors } = require('celebrate');
 const express = require('express');
 const mongoose = require('mongoose');
+const { errorHandler } = require('./middlewares/errors');
+const moviesRoutes = require('./routes/movies');
+const usersRoutes = require('./routes/users');
 
 const { PORT = 3000 } = process.env;
 
@@ -15,6 +19,11 @@ async function main() {
   mongoose.set('toJSON', { useProjection: true });
 
   app.use(express.json());
+  app.use(usersRoutes);
+  app.use(moviesRoutes);
+
+  app.use(errors());
+  app.use(errorHandler);
 
   await app.listen(PORT);
 
