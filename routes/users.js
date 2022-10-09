@@ -13,6 +13,6 @@ usersRoutes.use(auth);
 usersRoutes.get('/users/me', getMe);
 usersRoutes.patch('/users/me', validateUpdMe, updMe);
 
-usersRoutes.post('/signout', signout);
+usersRoutes.delete('/signout', signout);
 
 module.exports = usersRoutes;
