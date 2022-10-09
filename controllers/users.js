@@ -76,7 +76,6 @@ const updMe = (req, res, next) => {
 
   User.findByIdAndUpdate(_id, { email, name }, updSchemaSettings)
     .then((user) => {
-      console.log(user);
       isExist(user, res, next);
     }).catch((err) => processError(err, next));
 };

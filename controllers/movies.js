@@ -4,7 +4,6 @@ const processError = require('../utils/utils');
 
 const getMovies = (req, res, next) => {
   Movie.find({}).then((movies) => {
-    console.log(movies);
     res.send(movies.map((el) => el));
   }).catch((err) => processError(err, next));
 };

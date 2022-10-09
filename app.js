@@ -10,12 +10,17 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 const apiLimiter = require('./middlewares/rate');
 const rootRouter = require('./routes');
 
-const { PORT = 3000, FRONT_URL = 'http://localhost:3000' } = process.env;
+const {
+  PORT = 3000,
+  FRONT_URL = 'http://localhost:3000',
+  DB_URL = 'localhost:27017',
+  DB_NAME = 'moviesdb',
+} = process.env;
 
 const app = express();
 
 async function main() {
-  await mongoose.connect('mongodb://localhost:27017/moviesdb', {
+  await mongoose.connect(`mongodb://${DB_URL}/${DB_NAME}`, {
     useNewUrlParser: true,
     useUnifiedTopology: false,
   });
