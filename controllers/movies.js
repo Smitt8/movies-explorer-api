@@ -29,7 +29,7 @@ const postMovie = (req, res, next) => {
     thumbnail,
     movieId,
   });
-  movie.owner = '63405645bfeb481c583e7391'; //req.user._id;
+  movie.owner = req.user._id;
 
   movie.save().then((m) => {
     res.send(m);
@@ -38,7 +38,7 @@ const postMovie = (req, res, next) => {
 
 const deleteMovie = (req, res, next) => {
   const { id } = req.params;
-  const { _id } = '63405645bfeb481c583e7391'; //req.user;
+  const { _id } = req.user;
   Movie.findById(id).then((movie) => {
     const { owner } = movie;
     if (owner.equals(_id)) {
