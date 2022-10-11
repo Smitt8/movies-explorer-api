@@ -28,6 +28,7 @@ async function main() {
   mongoose.set('toObject', { useProjection: true });
   mongoose.set('toJSON', { useProjection: true });
 
+  app.use(requestLogger);
   app.use(apiLimiter);
   app.use(
     cors({
@@ -38,7 +39,6 @@ async function main() {
 
   app.use(express.json());
   app.use(cookieParser());
-  app.use(requestLogger);
 
   app.use('/api', rootRouter);
   app.use((req, res, next) => {

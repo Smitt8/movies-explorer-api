@@ -1,6 +1,7 @@
 const ErrorRights = require('../utils/ErrorRights');
 const Movie = require('../models/movie');
 const processError = require('../utils/utils');
+const ErrorNotFound = require('../utils/ErrorNotFound');
 
 const getMovies = (req, res, next) => {
   Movie.find({}).then((movies) => {
@@ -39,6 +40,9 @@ const deleteMovie = (req, res, next) => {
   const { id } = req.params;
   const { _id } = req.user;
   Movie.findById(id).then((movie) => {
+    if (!movie) {
+      return next(new ErrorNotFound('Фильм не найден'));
+    }
     const { owner } = movie;
     if (owner.equals(_id)) {
       return Movie.deleteOne({ _id: id })
