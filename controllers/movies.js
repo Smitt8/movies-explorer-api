@@ -4,8 +4,12 @@ const processError = require('../utils/utils');
 const ErrorNotFound = require('../utils/ErrorNotFound');
 
 const getMovies = (req, res, next) => {
+  const { _id } = req.user;
   Movie.find({}).then((movies) => {
-    res.send(movies.map((el) => el));
+    res.send(movies.filter((el) => {
+      const { owner } = el;
+      return owner.equals(_id);
+    }));
   }).catch((err) => processError(err, next));
 };
 
